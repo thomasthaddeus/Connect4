@@ -1,0 +1,9 @@
+{
+    "python.analysis.extraPaths": [
+        "./connect4/app/game",
+        "./connect4/app/gui/widgets",
+        "./connect4/app/gui/windows",
+        "./connect4/app/gui",
+        "./connect4/app/data"
+    ]
+}
