@@ -8,7 +8,22 @@ winner or indicating a draw.
 """
 
 import sys
-from PyQt6.QtWidgets import QLabel, QWidget, QComboBox, QLineEdit, QPushButton, QGridLayout, QHBoxLayout, QListWidget, QMessageBox, QVBoxLayout, QApplication, QListWidgetItem, QMainWindow, QTextBrowser
+from PyQt6.QtWidgets import (
+    QLabel,
+    QWidget,
+    QComboBox,
+    QLineEdit,
+    QPushButton,
+    QGridLayout,
+    QHBoxLayout,
+    QListWidget,
+    QMessageBox,
+    QVBoxLayout,
+    QApplication,
+    QListWidgetItem,
+    QMainWindow,
+    QTextBrowser,
+)
 from PyQt6.QtGui import QColor
 
 
@@ -21,6 +36,7 @@ class GameOverWidget(QWidget):
     Args:
         QWidget (_type_): _description_
     """
+
     def __init__(self, winner, parent=None):
         """
         Initialize the GameOverWidget.
@@ -86,9 +102,12 @@ class GameOverWidget(QWidget):
         # TODO: Implement the logic to return to the main menu or close this widget
         pass
 
-    # TODO: Add additional methods or logic as needed for the GameOverWidget.
 
-    """ return_to_main_menu_widget.py
+# TODO: Add additional methods or logic as needed for the GameOverWidget.
+
+
+class ReturnToMainMenuWidget(QWidget):
+    """return_to_main_menu_widget.py
 
     This widget provides a button that allows users to return to the main menu.
     When clicked, it opens the main menu window and closes the current window.
@@ -96,7 +115,6 @@ class GameOverWidget(QWidget):
     # TODO: Add additional methods or logic as needed for the ReturnToMainMenuWidget.
     """
 
-class ReturnToMainMenuWidget(QWidget):
     def __init__(self, parent=None):
         """
         Initialize the ReturnToMainMenuWidget.
@@ -110,10 +128,10 @@ class ReturnToMainMenuWidget(QWidget):
         self.layout = QVBoxLayout(self)
 
         # Button to return to the main menu
+        self.main_menu = MainMenuWindow()
         self.main_menu_button = QPushButton("Return to Main Menu")
         self.main_menu_button.clicked.connect(self.return_to_main)
         self.layout.addWidget(self.main_menu_button)
-
 
     def return_to_main(self):
         """
@@ -122,9 +140,9 @@ class ReturnToMainMenuWidget(QWidget):
         This method creates an instance of the MainMenuWindow, displays it,
         and then closes the current window (which is the game over window).
         """
-        self.main_menu = MainMenuWindow()
         self.main_menu.show()
         self.close()
+
 
 class PlayerSetupWindow(QWidget):
     def __init__(self):
@@ -172,6 +190,7 @@ class PlayerSetupWindow(QWidget):
         # Logic to start the game
         pass
 
+
 class NetworkSetupWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -208,9 +227,7 @@ class NetworkSetupWindow(QWidget):
             # Logic to start a game as host
             # Here you'd set up your game server on the specified port
             QMessageBox.information(
-                self,
-                "Hosting Game",
-                f"Started hosting on port {self.host_port.text()}"
+                self, "Hosting Game", f"Started hosting on port {self.host_port.text()}"
             )
 
         elif self.join_ip.text() and self.join_port.text():
@@ -220,15 +237,14 @@ class NetworkSetupWindow(QWidget):
                 self,
                 "Joining Game",
                 "Attempting to connect to"
-                f"{self.join_ip.text()}:{self.join_port.text()}"
+                f"{self.join_ip.text()}:{self.join_port.text()}",
             )
 
         else:
             QMessageBox.warning(
-                self,
-                "Error",
-                "Please provide valid hosting or joining details."
+                self, "Error", "Please provide valid hosting or joining details."
             )
+
 
 class MainMenuWindow(QWidget):
     def __init__(self):
@@ -291,6 +307,7 @@ class MainMenuWindow(QWidget):
         self.game_history_window = GameHistoryWindow([])
         self.game_history_window.show()
 
+
 class GameWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -306,7 +323,9 @@ class GameWindow(QMainWindow):
         self.setCentralWidget(central_widget)
 
         # Sample data
-        self.display_game_stats(True)  # True means the user won, False means the user lost
+        self.display_game_stats(
+            True
+        )  # True means the user won, False means the user lost
         self.setWindowTitle("Connect 4 Game")
 
         layout = QVBoxLayout(self)
@@ -317,10 +336,11 @@ class GameWindow(QMainWindow):
         for i in range(6):
             for j in range(7):
                 self.board_buttons[i][j].setFixedSize(50, 50)
-                self.board_buttons[i][j].clicked.connect(lambda i=i, j=j: self.drop_piece(i, j))
+                self.board_buttons[i][j].clicked.connect(
+                    lambda i=i, j=j: self.drop_piece(i, j)
+                )
                 board_layout.addWidget(self.board_buttons[i][j], i, j)
         layout.addLayout(board_layout)
-
 
         # Whose Turn
         self.turn_label = QLabel("Turn: Player 1")
@@ -349,7 +369,9 @@ class GameWindow(QMainWindow):
     def display_game_stats(self, user_won: bool):
         # Update the QTextBrowser with game stats
         if user_won:
-            self.text_browser.setHtml("<h1>You Won!</h1><p>Congratulations on your victory!</p>")
+            self.text_browser.setHtml(
+                "<h1>You Won!</h1><p>Congratulations on your victory!</p>"
+            )
             self.change_window_color(QColor(0, 255, 0))  # Green color for victory
         else:
             self.text_browser.setHtml("<h1>You Lost!</h1><p>Better luck next time.</p>")
@@ -359,7 +381,11 @@ class GameWindow(QMainWindow):
         # Change the window color
         self.setStyleSheet(f"background-color: {color.name()}")
 
+
 class GameHistoryWindow(QWidget):
+    def __init__(self, games):
+        super().__init__()
+        self.setWindowTitle("Game History")
         self.games = games
 
         layout = QVBoxLayout(self)
@@ -368,8 +394,8 @@ class GameHistoryWindow(QWidget):
         self.games_list = QListWidget(self)
         for game in games:
             # Assuming each game has a unique 'id' and 'name'
-            item = QListWidgetItem(game['name'])
-            item.setData(256, game['id'])  # 256 (Qt.UserRole) is arbitrary
+            item = QListWidgetItem(game["name"])
+            item.setData(256, game["id"])  # 256 (Qt.UserRole) is arbitrary
             self.games_list.addItem(item)
         layout.addWidget(self.games_list)
 
@@ -377,15 +403,29 @@ class GameHistoryWindow(QWidget):
         view_details_btn = QPushButton("View Details")
         view_details_btn.clicked.connect(self.view_details)
         layout.addWidget(view_details_btn)
-
-        # Return to main menu button
-        main_menu_btn = QPushButton("Return to Main Menu")
-        main_menu_btn.clicked.connect(self.return_to_main)
-        layout.addWidget(main_menu_btn)
-
         # Return to Main Menu Widget
         self.return_widget = ReturnToMainMenuWidget(self)
         layout.addWidget(self.return_widget)
+
+        # Return to main menu button
+        main_menu_btn = QPushButton("Return to Main Menu")
+        main_menu_btn.clicked.connect(self.return_widget.return_to_main)
+        layout.addWidget(main_menu_btn)
+
+
+    def view_details(self):
+        # Logic to view game details
+        selected_items = self.games_list.selectedItems()
+        if selected_items:
+            selected_game_id = selected_items[0].data(256)
+            # Find the selected game from self.games and show its details
+            # For instance, you might show a new window or a dialog here
+            pass
+
+    def main_menu(self):
+        # Logic to return to the main menu or close this window
+        self.return_widget.return_to_main()
+        self.close()
 
 class GameStatisticsWindow(QWidget):
     def __init__(self, stats, parent=None):
@@ -395,14 +435,22 @@ class GameStatisticsWindow(QWidget):
         layout = QVBoxLayout(self)
 
         # Overall win/loss/draw statistics
-        overall_label = QLabel(f"Wins: {stats['wins']}, Losses: {stats['losses']}, Draws: {stats['draws']}")
+        overall_label = QLabel(
+            f"Wins: {stats['wins']}, Losses: {stats['losses']}, Draws: {stats['draws']}"
+        )
         layout.addWidget(overall_label)
 
         # Individual player statistics (assuming stats holds data for two players)
-        player1_label = QLabel(f"Player 1 - Wins: {stats['player1']['wins']}, Losses: {stats['player1']['losses']}")
+        player1_label = QLabel(
+            f"Player 1 - Wins:   {stats['player1']['wins']},"
+            f"           Losses: {stats['player1']['losses']}"
+        )
         layout.addWidget(player1_label)
 
-        player2_label = QLabel(f"Player 2 - Wins: {stats['player2']['wins']}, Losses: {stats['player2']['losses']}")
+        player2_label = QLabel(
+            f"Player 2 - Wins:   {stats['player2']['wins']},"
+            f"           Losses: {stats['player2']['losses']}"
+        )
         layout.addWidget(player2_label)
 
         # Return to Main Menu Button
@@ -413,6 +461,7 @@ class GameStatisticsWindow(QWidget):
     def main_menu(self):
         # Logic to return to the main menu or close this window
         pass
+
 
 class GameOverWindow(QWidget):
     def __init__(self, winner, parent=None):
@@ -442,31 +491,14 @@ class GameOverWindow(QWidget):
         # Logic to reset the game or signal main window to start a new game
         pass
 
-    def __init__(self, games):
-        super().__init__()
-        self.setWindowTitle("Game History")
 
-
-
-    def view_details(self):
-        # Logic to view game details
-        selected_items = self.games_list.selectedItems()
-        if selected_items:
-            selected_game_id = selected_items[0].data(256)
-            # Find the selected game from self.games and show its details
-            # For instance, you might show a new window or a dialog here
-            pass
-    def main_menu(self):
-        # Logic to return to the main menu or close this window
-        pass
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     # For Game History Window with sample data
     sample_games = [
-        {'id': 1, 'name': 'Game 1', 'moves': [], 'winner': 'Player 1'},
-        {'id': 2, 'name': 'Game 2', 'moves': [], 'winner': 'Player 2'},
+        {"id": 1, "name": "Game 1", "moves": [], "winner": "Player 1"},
+        {"id": 2, "name": "Game 2", "moves": [], "winner": "Player 2"},
     ]
 
     # For Player Setup Window
@@ -484,7 +516,7 @@ if __name__ == '__main__':
     window4.show()
     window5.show()
     window6.show()
-
+    window7.show()
     app.exec()
 
     sys.exit(app.exec())
