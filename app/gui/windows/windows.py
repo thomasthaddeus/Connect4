@@ -1,10 +1,13 @@
-""" game_over_widget.py
+"""windows.py
+_summary_
 
-The GameOverWidget is a PyQt6 widget that displays the result of a game.
+_extended_summary_
 
-It provides options for the user to either play the game again or return to the
-main menu. The widget is designed to be flexible, allowing for the display of a
-winner or indicating a draw.
+Raises:
+    NotImplementedError: _description_
+
+Returns:
+    _type_: _description_
 """
 
 import sys
@@ -28,7 +31,7 @@ from PyQt6.QtGui import QColor
 
 
 class GameOverWidget(QWidget):
-    """
+    """TODO: Docstring for class.
     GameOverWidget _summary_
 
     _extended_summary_
@@ -89,8 +92,20 @@ class GameOverWidget(QWidget):
         This method should be connected to the game logic to reset the game
         state or emit a signal to the main window to start a new game.
         """
-        # TODO: Implement the logic to reset the game or signal the main window
-        pass
+        # Reset the game state
+        self.game_state.reset()
+
+        # Emit a signal to the main window to start a new game
+        self.new_game_signal.emit()
+
+    def set_winner(self, winner):
+        """
+        Set the winner of the game.
+
+        Args:
+            winner (str): The name of the winner.
+        """
+        self.winner_label.setText(f"Winner: {winner}")
 
     def main_menu(self):
         """
@@ -99,20 +114,19 @@ class GameOverWidget(QWidget):
         This method can be connected to the main window or game logic
         to switch the view back to the main menu or close the current game view.
         """
-        # TODO: Implement the logic to return to the main menu or close this widget
-        pass
+        # Create an instance of the main menu window
+        main_menu_window = MainMenuWindow()
 
+        # Show the main menu window
+        main_menu_window.show()
 
-# TODO: Add additional methods or logic as needed for the GameOverWidget.
-
+        # Close the current window (which is the game over window)
+        self.close()
 
 class ReturnToMainMenuWidget(QWidget):
-    """return_to_main_menu_widget.py
-
+    """
     This widget provides a button that allows users to return to the main menu.
     When clicked, it opens the main menu window and closes the current window.
-
-    # TODO: Add additional methods or logic as needed for the ReturnToMainMenuWidget.
     """
 
     def __init__(self, parent=None):
@@ -133,6 +147,26 @@ class ReturnToMainMenuWidget(QWidget):
         self.main_menu_button.clicked.connect(self.return_to_main)
         self.layout.addWidget(self.main_menu_button)
 
+    def confirm_return_to_main(self):
+        """
+        Display a confirmation dialog before returning to the main menu.
+
+        This method creates a QMessageBox to confirm whether the user wants to
+        return to the main menu. If the user confirms, the main menu window is
+        displayed and the current window is closed.
+        """
+        # Create a confirmation dialog
+        confirm_dialog = QMessageBox()
+        confirm_dialog.setWindowTitle("Confirm Return to Main Menu")
+        confirm_dialog.setText("Are you sure you want to return to the main menu?")
+        confirm_dialog.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
+        # If the user confirms, return to the main menu
+        if confirm_dialog.exec() == QMessageBox.Yes:
+            main_menu_window = MainMenuWindow()
+            main_menu_window.show()
+            self.close()
+
     def return_to_main(self):
         """
         Open the main menu window and close the current window.
@@ -145,6 +179,14 @@ class ReturnToMainMenuWidget(QWidget):
 
 
 class PlayerSetupWindow(QWidget):
+    """TODO: Docstring for class.
+    PlayerSetupWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Player Setup")
@@ -180,6 +222,15 @@ class PlayerSetupWindow(QWidget):
         layout.addWidget(start_game_btn)
 
     def toggle_player2_input(self, text):
+        """
+        toggle_player2_input _summary_
+
+        _extended_summary_
+
+        Args:
+            text (_type_): _description_
+        """
+        # TODO: Docstring for class.
         if text == "AI":
             self.p2_name_entry.setEnabled(False)
             self.p2_name_entry.clear()
@@ -187,11 +238,19 @@ class PlayerSetupWindow(QWidget):
             self.p2_name_entry.setEnabled(True)
 
     def start_game(self):
-        # Logic to start the game
+        # TODO: Logic to start the game
         pass
 
-
 class NetworkSetupWindow(QWidget):
+    """
+    NetworkSetupWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
+    # TODO: Docstring for class.
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Network Setup")
@@ -222,6 +281,11 @@ class NetworkSetupWindow(QWidget):
         layout.addWidget(start_connect_btn)
 
     def start_or_connect(self):
+        """
+        start_or_connect _summary_
+
+        _extended_summary_
+        """
         # Check if the user wants to host or join a game
         if self.host_port.text():
             # Logic to start a game as host
@@ -245,8 +309,16 @@ class NetworkSetupWindow(QWidget):
                 self, "Error", "Please provide valid hosting or joining details."
             )
 
-
 class MainMenuWindow(QWidget):
+    """
+    MainMenuWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
+    # TODO: Docstring for class.
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Connect 4")
@@ -288,20 +360,43 @@ class MainMenuWindow(QWidget):
         layout.addWidget(exit_button)
 
     def play_against_ai(self):
+        """
+        play_against_ai _summary_
+
+        _extended_summary_
+        """
         self.player_setup_window = PlayerSetupWindow()
         self.player_setup_window.show()
 
     def multiplayer(self):
+        """
+        multiplayer _summary_
+
+        _extended_summary_
+        """
+        # TODO: docstring for multiplayer window
         self.network_setup_window = NetworkSetupWindow()
         self.network_setup_window.show()
 
     def view_game_stats(self):
+        """
+        view_game_stats _summary_
+
+        _extended_summary_
+        """
+        # TODO: docstring for game statistics window
         # For simplicity, I'm assuming empty data.
         # Replace with your actual data.
         self.game_statistics_window = GameStatisticsWindow([])
         self.game_statistics_window.show()
 
     def view_game_history(self):
+        """
+        view_game_history _summary_
+
+        _extended_summary_
+        """
+        # TODO: docstring for game history window
         # For simplicity, I'm assuming empty data.
         # Replace with your actual data.
         self.game_history_window = GameHistoryWindow([])
@@ -309,6 +404,14 @@ class MainMenuWindow(QWidget):
 
 
 class GameWindow(QMainWindow):
+    """ TODO: Docstring for GameWindow.
+    GameWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QMainWindow (_type_): _description_
+    """
     def __init__(self):
         super().__init__()
 
@@ -356,18 +459,30 @@ class GameWindow(QMainWindow):
         layout.addWidget(self.score_label)
 
     def drop_piece(self, row, col):
-        # Logic to handle dropping a piece onto the board
+        # TODO: Logic to handle dropping a piece onto the board
         pass
 
     def end_game(self):
-        # Logic to handle ending the game
-        # Proceed to game over window
-        # This should be called when the user clicks the "End Game" button
-        # This should also be called when the game is over (i.e. someone wins or the board is full)
+        """
+        end_game _summary_
+
+        _extended_summary_
+        """
+        # TODO: Logic to handle ending the game. Proceed to game over window should be called when the user clicks the "End Game" button
+        # TODO: This should also be called when the game is over (i.e. someone wins or the board is full)
         pass
 
     def display_game_stats(self, user_won: bool):
-        # Update the QTextBrowser with game stats
+        """
+        display_game_stats _summary_
+
+        _extended_summary_
+
+        Args:
+            user_won (bool): _description_
+        """
+        # TODO: Docsring for display_game_stats
+        # TODO: Update the QTextBrowser with game stats
         if user_won:
             self.text_browser.setHtml(
                 "<h1>You Won!</h1><p>Congratulations on your victory!</p>"
@@ -378,11 +493,28 @@ class GameWindow(QMainWindow):
             self.change_window_color(QColor(255, 0, 0))  # Red color for defeat
 
     def change_window_color(self, color: QColor):
+        """
+        change_window_color _summary_
+
+        _extended_summary_
+
+        Args:
+            color (QColor): _description_
+        """
+        # TODO: Docstring for change_window_color
         # Change the window color
         self.setStyleSheet(f"background-color: {color.name()}")
 
-
 class GameHistoryWindow(QWidget):
+    """
+    GameHistoryWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
+    # TODO: Docstring for GameHistoryWindow.
     def __init__(self, games):
         super().__init__()
         self.setWindowTitle("Game History")
@@ -414,20 +546,38 @@ class GameHistoryWindow(QWidget):
 
 
     def view_details(self):
-        # Logic to view game details
+        """
+        Logic to view game details
+
+        _extended_summary_
+
+        Raises:
+            NotImplementedError: _description_
+        """
+        # TODO: Docstring for view_details
         selected_items = self.games_list.selectedItems()
         if selected_items:
-            selected_game_id = selected_items[0].data(256)
+            selected_game_id = selected_items[0].data(256)  # pylint: disable=W0612
+            # 256 (Qt.UserRole) is arbitrary
             # Find the selected game from self.games and show its details
             # For instance, you might show a new window or a dialog here
-            pass
+            raise NotImplementedError("This feature has not been implemented yet.")
 
     def main_menu(self):
-        # Logic to return to the main menu or close this window
+        """Logic to return to the main menu or close this window"""
         self.return_widget.return_to_main()
         self.close()
 
 class GameStatisticsWindow(QWidget):
+    """
+    GameStatisticsWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
+    # TODO: Docstring for GameStatisticsWindow.
     def __init__(self, stats, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Game Statistics")
@@ -459,11 +609,21 @@ class GameStatisticsWindow(QWidget):
         layout.addWidget(main_menu_button)
 
     def main_menu(self):
-        # Logic to return to the main menu or close this window
+        # TODO: Docstring for main_menu
+        # TODO: Logic to return to the main menu or close this window
         pass
 
 
 class GameOverWindow(QWidget):
+    """
+    GameOverWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
+    # TODO: Docstring for GameOverWindow.
     def __init__(self, winner, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Game Over")
@@ -491,8 +651,13 @@ class GameOverWindow(QWidget):
         # Logic to reset the game or signal main window to start a new game
         pass
 
+def main():
+    """
+    main _summary_
 
-if __name__ == "__main__":
+    _extended_summary_
+    """
+    # TODO: Docstring for main.
     app = QApplication(sys.argv)
 
     # For Game History Window with sample data
@@ -520,3 +685,8 @@ if __name__ == "__main__":
     app.exec()
 
     sys.exit(app.exec())
+
+
+
+if __name__ == "__main__":
+    main()
