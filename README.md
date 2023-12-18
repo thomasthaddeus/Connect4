@@ -4,8 +4,6 @@ This repository contains the program for a python implementation of a connect 4 
 
 ## TODO
 
-We've primarily discussed and sketched out GUI components and a basic outline for some backend functionalities. Here's what we've touched on and what might still be pending:
-
 ### 1. **Completed**
 
 - GUI Layouts for:
@@ -47,5 +45,3 @@ We've primarily discussed and sketched out GUI components and a basic outline fo
   - Both unit tests (for individual components/functions) and integration tests (for the whole game) need to be considered.
 - **Documentation**:
   - Commenting the code, writing user manuals, or developer documentation if needed.
-
-Remember, when developing software, especially games, there are often many smaller tasks that arise as you dive deeper into implementation. It's always a good practice to keep a detailed checklist and periodically review and update it based on the progress and any new requirements or changes.
