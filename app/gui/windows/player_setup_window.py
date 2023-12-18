@@ -7,7 +7,20 @@ _extended_summary_
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QComboBox
 
 class PlayerSetupWindow(QWidget):
+    """
+    PlayerSetupWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
     def __init__(self):
+        """
+        __init__ _summary_
+
+        _extended_summary_
+        """
         super().__init__()
         self.setWindowTitle("Player Setup")
 
@@ -42,6 +55,14 @@ class PlayerSetupWindow(QWidget):
         layout.addWidget(start_game_btn)
 
     def toggle_player2_input(self, text):
+        """
+        toggle_player2_input _summary_
+
+        _extended_summary_
+
+        Args:
+            text (_type_): _description_
+        """
         if text == "AI":
             self.p2_name_entry.setEnabled(False)
             self.p2_name_entry.clear()
@@ -49,5 +70,10 @@ class PlayerSetupWindow(QWidget):
             self.p2_name_entry.setEnabled(True)
 
     def start_game(self):
+        """
+        start_game _summary_
+
+        _extended_summary_
+        """
         # Logic to start the game
         pass

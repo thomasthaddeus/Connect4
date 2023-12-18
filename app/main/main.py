@@ -1,17 +1,37 @@
-# main.py
+""" main.py
+
+_summary_
+
+_extended_summary_
+"""
 
 from AI import AI
 from board import Board, Connect4
 from player import Player
 
 class GameBackend:
+    """
+     _summary_
+
+    _extended_summary_
+    """
     def __init__(self):
+        """
+        __init__ _summary_
+
+        _extended_summary_
+        """
         self.board = Board()
         self.game = Connect4()
         self.players = [Player("Player 1", 1), Player("Player 2", 2, is_ai=True)]
         self.ai = AI(2)  # Assuming Player 2 is the AI
 
     def start_game(self):
+        """
+        start_game _summary_
+
+        _extended_summary_
+        """
         while not self.board.is_full() and not self.board.get_winner():
             current_player = self.players[self.board.current_player - 1]
             if current_player.is_ai_player():

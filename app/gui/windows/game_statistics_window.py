@@ -7,7 +7,24 @@ _extended_summary_
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
 
 class GameStatisticsWindow(QWidget):
+    """
+    GameStatisticsWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
     def __init__(self, stats, parent=None):
+        """
+        __init__ _summary_
+
+        _extended_summary_
+
+        Args:
+            stats (_type_): _description_
+            parent (_type_, optional): _description_. Defaults to None.
+        """
         super().__init__(parent)
         self.setWindowTitle("Game Statistics")
 
@@ -30,5 +47,10 @@ class GameStatisticsWindow(QWidget):
         layout.addWidget(main_menu_button)
 
     def main_menu(self):
+        """
+        main_menu _summary_
+
+        _extended_summary_
+        """
         # Logic to return to the main menu or close this window
         pass

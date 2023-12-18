@@ -8,7 +8,23 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QListWidget, QLis
 from return_to_main_menu_widget import ReturnToMainMenuWidget
 
 class GameHistoryWindow(QWidget):
+    """
+    GameHistoryWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
     def __init__(self, games):
+        """
+        __init__ _summary_
+
+        _extended_summary_
+
+        Args:
+            games (_type_): _description_
+        """
         super().__init__()
         self.setWindowTitle("Game History")
         self.games = games
@@ -40,6 +56,11 @@ class GameHistoryWindow(QWidget):
 
 
     def view_details(self):
+        """
+        view_details _summary_
+
+        _extended_summary_
+        """
         # Logic to view game details
         selected_items = self.games_list.selectedItems()
         if selected_items:

@@ -8,7 +8,20 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton
 
 
 class NetworkSetupWindow(QWidget):
+    """
+    NetworkSetupWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
     def __init__(self):
+        """
+        __init__ _summary_
+
+        _extended_summary_
+        """
         super().__init__()
         self.setWindowTitle("Network Setup")
 
@@ -38,6 +51,11 @@ class NetworkSetupWindow(QWidget):
         layout.addWidget(start_connect_btn)
 
     def start_or_connect(self):
+        """
+        start_or_connect _summary_
+
+        _extended_summary_
+        """
         # Check if the user wants to host or join a game
         if self.host_port.text():
             # Logic to start a game as host

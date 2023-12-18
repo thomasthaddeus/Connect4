@@ -15,7 +15,20 @@ from .player_setup_window import PlayerSetupWindow
 
 
 class MainMenuWindow(QWidget):
+    """
+    MainMenuWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
     def __init__(self):
+        """
+        __init__ _summary_
+
+        _extended_summary_
+        """
         super().__init__()
         self.setWindowTitle("Connect 4")
 
@@ -56,20 +69,40 @@ class MainMenuWindow(QWidget):
         layout.addWidget(exit_button)
 
     def play_against_ai(self):
+        """
+        play_against_ai _summary_
+
+        _extended_summary_
+        """
         self.player_setup_window = PlayerSetupWindow()
         self.player_setup_window.show()
 
     def multiplayer(self):
+        """
+        multiplayer _summary_
+
+        _extended_summary_
+        """
         self.network_setup_window = NetworkSetupWindow()
         self.network_setup_window.show()
 
     def view_game_stats(self):
+        """
+        view_game_stats _summary_
+
+        _extended_summary_
+        """
         # For simplicity, I'm assuming empty data.
         # Replace with your actual data.
         self.game_statistics_window = GameStatisticsWindow([])
         self.game_statistics_window.show()
 
     def view_game_history(self):
+        """
+        view_game_history _summary_
+
+        _extended_summary_
+        """
         # For simplicity, I'm assuming empty data.
         # Replace with your actual data.
         self.game_history_window = GameHistoryWindow([])

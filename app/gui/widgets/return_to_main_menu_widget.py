@@ -7,9 +7,17 @@ When clicked, it opens the main menu window and closes the current window.
 """
 
 from PyQt6.QtWidgets import QWidget, QPushButton, QVBoxLayout, QApplication
-from main_menu_window import MainMenuWindow
+from windows.main_menu_window import MainMenuWindow
 
 class ReturnToMainMenuWidget(QWidget):
+    """
+    ReturnToMainMenuWidget _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
     def __init__(self, parent=None):
         """
         Initialize the ReturnToMainMenuWidget.
@@ -40,8 +48,7 @@ class ReturnToMainMenuWidget(QWidget):
         self.close()
 
 
-# Test this widget directly if needed
-# Test the ReturnToMainMenuWidget directly
+# TODO: Test the ReturnToMainMenuWidget directly
 # This allows for quick testing of this widget without needing to run the entire application.
 if __name__ == '__main__':
     app = QApplication([])

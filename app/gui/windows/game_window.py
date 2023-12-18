@@ -8,7 +8,20 @@ from widgets.game_over_widget import GameOverWidget
 
 
 class GameWindow(QWidget):
+    """
+    GameWindow _summary_
+
+    _extended_summary_
+
+    Args:
+        QWidget (_type_): _description_
+    """
     def __init__(self):
+        """
+        __init__ _summary_
+
+        _extended_summary_
+        """
         super().__init__()
         self.setWindowTitle("Connect 4 Game")
 
@@ -38,10 +51,24 @@ class GameWindow(QWidget):
         layout.addWidget(self.score_label)
 
     def drop_piece(self, row, col):
+        """
+        drop_piece _summary_
+
+        _extended_summary_
+
+        Args:
+            row (_type_): _description_
+            col (_type_): _description_
+        """
         # Logic to handle dropping a piece onto the board
         pass
 
     def end_game(self):
+        """
+        end_game _summary_
+
+        _extended_summary_
+        """
         # Logic to handle ending the game
         # Proceed to game over window
         # This should be called when the user clicks the "End Game" button
