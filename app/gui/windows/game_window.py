@@ -1,26 +1,34 @@
 """game_window.py
-_summary_
 
-_extended_summary_
+Defines the main game interface for a Connect 4 game using PyQt6.
+
+This module contains the GameWindow class, which creates a graphical user
+interface for the Connect 4 game. The window includes a grid layout
+representing the game board, labels to display whose turn it is and the current
+score, and a button to end the game. The class handles player interactions such
+as dropping pieces onto the board and ending the game.
 """
+
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QGridLayout, QApplication
 from widgets.game_over_widget import GameOverWidget
 
 
 class GameWindow(QWidget):
     """
-    GameWindow _summary_
+    A window representing the Connect 4 game interface.
 
-    _extended_summary_
+    This class extends QWidget and creates a user interface for playing Connect
+    4. It includes a grid of buttons representing the game board, labels for
+    turn and score, and an end game button.
 
     Args:
-        QWidget (_type_): _description_
+        QWidget (QWidget): Inherits from QWidget, a base class for all UI
+        objects in PyQt.
     """
+
     def __init__(self):
         """
-        __init__ _summary_
-
-        _extended_summary_
+        Initializes the GameWindow with UI components for playing Connect 4.
         """
         super().__init__()
         self.setWindowTitle("Connect 4 Game")
@@ -52,29 +60,51 @@ class GameWindow(QWidget):
 
     def drop_piece(self, row, col):
         """
-        drop_piece _summary_
+        Handles the logic for dropping a piece onto the board.
 
-        _extended_summary_
+        This method is triggered when a board button is clicked. It updates the game state based
+        on the player's move and refreshes the board display.
 
         Args:
-            row (_type_): _description_
-            col (_type_): _description_
+            row (int): The row index of the clicked button on the board.
+            col (int): The column index of the clicked button on the board.
         """
-        # Logic to handle dropping a piece onto the board
-        pass
+        # Assuming a `Game` class instance manages the game state
+        game_state = Game.get_instance()
+        player = game_state.current_player
+        move_success = game_state.make_move(player, col)
 
-    def end_game(self):
+        if move_success:
+            self.update_board_display()
+            if game_state.check_winner():
+                self.end_game(winner=player)
+            else:
+                game_state.switch_player()
+                self.turn_label.setText(f"Turn: Player {game_state.current_player}")
+        else:
+            # Handle invalid move (e.g., column is full)
+            pass
+
+    def end_game(self, winner=None):
         """
-        end_game _summary_
+        Handles the logic for ending the game.
 
-        _extended_summary_
+        This method is triggered when the 'End Game' button is clicked or when the game is over.
+        It terminates the current game session and displays the game over screen or returns to the
+        main menu.
+
+        Args:
+            winner (str, optional): The winner of the game, if applicable. Defaults to None.
         """
-        # Logic to handle ending the game
-        # Proceed to game over window
-        # This should be called when the user clicks the "End Game" button
-        # This should also be called when the game is over (i.e. someone wins or the board is full)
+        # Assuming `GameOverWidget` is a widget to display the game over screen
+        if winner:
+            message = f"Player {winner} wins!"
+        else:
+            message = "Game over!"
 
-        pass
+        game_over_widget = GameOverWidget(message)
+        game_over_widget.show()
+        self.close()  # Close the current game window
 
 if __name__ == '__main__':
     app = QApplication([])

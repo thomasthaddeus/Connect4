@@ -1,33 +1,37 @@
 """main_menu_window.py
-_summary_
 
-_extended_summary_
+Defines the main menu GUI for a Connect 4 game using PyQt6.
+
+This module contains the MainMenuWindow class, which creates a graphical user
+interface for the main menu of a Connect 4 game. The menu offers options to
+play against AI, start a multiplayer game, view game statistics, view game
+history, and exit the game. Each option is represented by a button that, when
+clicked, opens the corresponding window or performs the associated action.
 """
-
 
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel
-from .game_history_window import GameHistoryWindow
-from .game_statistics_window import GameStatisticsWindow
-from .network_setup_window import NetworkSetupWindow
-from .player_setup_window import PlayerSetupWindow
-
-
+from windows.game_history_window import GameHistoryWindow
+from windows.game_statistics_window import GameStatisticsWindow
+from windows.network_setup_window import NetworkSetupWindow
+from windows.player_setup_window import PlayerSetupWindow
 
 class MainMenuWindow(QWidget):
     """
-    MainMenuWindow _summary_
+    A window representing the main menu of a Connect 4 game.
 
-    _extended_summary_
+    This class extends QWidget and creates a user interface for the main menu
+    of the game. It provides options to start different modes of the game, view
+    statistics, view history, and exit the application.
 
     Args:
-        QWidget (_type_): _description_
+        QWidget (QWidget): Inherits from QWidget, a base class for all UI
+        objects in PyQt.
     """
+
     def __init__(self):
         """
-        __init__ _summary_
-
-        _extended_summary_
+        Initializes the MainMenuWindow with UI components for the main menu.
         """
         super().__init__()
         self.setWindowTitle("Connect 4")
@@ -70,27 +74,33 @@ class MainMenuWindow(QWidget):
 
     def play_against_ai(self):
         """
-        play_against_ai _summary_
+        Opens the player setup window for a game against AI.
 
-        _extended_summary_
+        This method is triggered when the 'Play against AI' button is clicked.
+        It initializes and shows the PlayerSetupWindow for setting up a game
+        against an AI opponent.
         """
         self.player_setup_window = PlayerSetupWindow()
         self.player_setup_window.show()
 
     def multiplayer(self):
         """
-        multiplayer _summary_
+        Opens the network setup window for a multiplayer game.
 
-        _extended_summary_
+        This method is triggered when the 'Multiplayer (local or over network)'
+        button is clicked. It initializes and shows the NetworkSetupWindow for
+        setting up a local or network multiplayer game.
         """
         self.network_setup_window = NetworkSetupWindow()
         self.network_setup_window.show()
 
     def view_game_stats(self):
         """
-        view_game_stats _summary_
+        Opens the game statistics window.
 
-        _extended_summary_
+        This method is triggered when the 'View Game Statistics' button is
+        clicked. It initializes and shows the GameStatisticsWindow for viewing
+        game statistics.
         """
         # For simplicity, I'm assuming empty data.
         # Replace with your actual data.
@@ -99,9 +109,11 @@ class MainMenuWindow(QWidget):
 
     def view_game_history(self):
         """
-        view_game_history _summary_
+        Opens the game history window.
 
-        _extended_summary_
+        This method is triggered when the View Game History button is clicked.
+        It initializes and shows the GameHistoryWindow for viewing the history
+        of past games.
         """
         # For simplicity, I'm assuming empty data.
         # Replace with your actual data.

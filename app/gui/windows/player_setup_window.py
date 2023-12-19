@@ -1,25 +1,40 @@
 """player_setup_window.py
-_summary_
 
-_extended_summary_
+Defines a GUI window for setting up players in a Connect 4 game using PyQt6.
+
+This module contains the PlayerSetupWindow class, which creates a graphical
+user interface for users to enter names for Player 1 and Player 2 or choose to
+play against an AI. The class allows for dynamic switching between entering a
+name for Player 2 or selecting an AI opponent. It also includes a button to
+start the game once the players are set up.
 """
 
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QComboBox
+from PyQt6.QtWidgets import (
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QComboBox,
+)
+
 
 class PlayerSetupWindow(QWidget):
     """
-    PlayerSetupWindow _summary_
+    A window for setting up players in a Connect 4 game.
 
-    _extended_summary_
+    This class extends QWidget and creates a user interface with input fields
+    for player names and an option to select an AI opponent. It also includes a
+    'Start Game' button.
 
     Args:
-        QWidget (_type_): _description_
+        QWidget (QWidget): Inherits from QWidget, a base class for all UI objects in PyQt.
     """
+
     def __init__(self):
         """
-        __init__ _summary_
-
-        _extended_summary_
+        Initializes the PlayerSetupWindow with UI components for player setup.
         """
         super().__init__()
         self.setWindowTitle("Player Setup")
@@ -56,12 +71,15 @@ class PlayerSetupWindow(QWidget):
 
     def toggle_player2_input(self, text):
         """
-        toggle_player2_input _summary_
+        Toggles the input method for Player 2 between a QLineEdit and selecting
+        AI.
 
-        _extended_summary_
+        When 'AI' is selected, the QLineEdit for Player 2's name is disabled
+        and cleared. Otherwise, it is enabled for name input.
 
         Args:
-            text (_type_): _description_
+            text (str): The current text of the combo box, used to determine
+            the toggle state.
         """
         if text == "AI":
             self.p2_name_entry.setEnabled(False)
@@ -71,9 +89,9 @@ class PlayerSetupWindow(QWidget):
 
     def start_game(self):
         """
-        start_game _summary_
+        Placeholder method for starting the game.
 
-        _extended_summary_
+        This method should be implemented to initiate the game with the provided player details once the 'Start Game' button is clicked.
         """
         # Logic to start the game
         pass

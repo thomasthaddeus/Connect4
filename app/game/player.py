@@ -1,12 +1,11 @@
 """player.py
 
-Summary:
-    Defines the Player class for a Connect 4 game.
+Defines the Player class for a Connect 4 game.
 
-Extended Summary:
-    This module contains the Player class, which represents a player in a Connect 4 game.
-    It includes attributes and methods for managing player details, such as name, player number,
-    AI status, score, and making moves. The class supports both human and AI players.
+This module contains the Player class, which represents a player in a Connect 4
+game. It includes attributes and methods for managing player details, such as
+name, player number, AI status, score, and making moves. The class supports
+both human and AI players.
 """
 
 import random
@@ -15,13 +14,16 @@ class Player:
     """
     Represents a player in the Connect 4 game.
 
-    This class encapsulates the details and actions of a player, including the ability to make moves,
-    track scores, and determine if the player is an AI or a human.
+    This class encapsulates the details and actions of a player, including the
+    ability to make moves, track scores, and determine if the player is an AI
+    or a human.
 
     Attributes:
         name (str): The name of the player.
-        number (int): An identifier for the player, often used to distinguish players in the game.
-        is_ai (bool): Indicates whether the player is controlled by AI. Default is False for human players.
+        number (int): An identifier for the player, often used to distinguish
+          players in the game.
+        is_ai (bool): Indicates whether the player is controlled by AI. Default
+          is False for human players.
         score (int): The player's current score in the game.
     """
 
@@ -32,7 +34,8 @@ class Player:
         Args:
             name (str): The name of the player.
             number (int): An identifier for the player.
-            is_ai (bool, optional): Indicates if the player is an AI. Defaults to False.
+            is_ai (bool, optional): Indicates if the player is an AI. Defaults
+              to False.
         """
         self.name = name
         self.number = number  # Player's identifier (e.g., 1 for red, 2 for yellow)
@@ -95,7 +98,8 @@ class Player:
             board (list): The current state of the game board.
 
         Returns:
-            int: The column index where the AI decides to make a move. None if no move is made.
+            int: The column index where the AI decides to make a move. None if
+            no move is made.
         """
         if self.is_ai:
             # Basic AI logic: make a random move

@@ -1,7 +1,8 @@
 """AI.py
 This module provides an AI class for playing a board game.
 
-The AI uses the minimax algorithm with alpha-beta pruning to evaluate board states and make decisions.
+The AI uses the minimax algorithm with alpha-beta pruning to evaluate board
+states and make decisions.
 
 Returns:
     _type_: _description_

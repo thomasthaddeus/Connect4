@@ -130,38 +130,87 @@ class Network:
             conn.close()
             self.clients.remove(conn)
 
-    # Placeholder methods for game interfacing
     def process_game_logic(self, data):
         """
-        Processes the game logic based on received data.
-
-        Args:
-            data (dict): The data received from a client, typically
-              representing a game move.
+        Processes a game move received from a client.
 
         This method should be implemented to integrate with the Connect4 and
         Board classes, processing the game logic and updating the game state
         accordingly.
+
+        Args:
+            data (dict): The data received from a client, containing the player
+              identifier and the move.
+        Returns:
+            dict: The updated game state after processing the move.
         """
-        pass
+        player = data['player']
+        column = data['column']
+
+        # Assuming a `Game` class is managing the game state
+        game = Game.get_instance()
+        move_valid = game.make_move(player, column)
+
+        if move_valid:
+            # Broadcast updated state to all clients
+            updated_state = game.get_state()
+            for client in self.clients:
+                client.send(json.dumps(updated_state).encode())
+            return updated_state
+        else:
+            return {"error": "Invalid move"}
+
+    # def send_move(self, move):
+    #     """
+    #     Sends a move to the game.
+
+    #     This method should integrate with the Connect4 and Board classes, sending a move to the game logic for processing.
+
+    #     Args:
+    #         move (dict): The move to be sent to the game.
+    #     """
+    #     # Assuming `move` is a dictionary containing the player and the column they chose
+    #     player = move.get('player')
+    #     column = move.get('column')
+
+    #     # Send the move to the game logic
+    #     # You will need to implement how this interacts with your game
+    #     game_state = Game.get_instance()
+    #     game_state.make_move(player, column)
 
     def send_move(self, move):
         """
-        Sends a move to the game.
+        Sends a move to the game server.
 
         Args:
-            move (dict): The move to be sent to the game.
-
-        This method should be implemented to integrate with the Connect4 and
-        Board classes, sending a move to the game logic for processing.
+            move (dict): The move to be sent, containing the player identifier and the move.
         """
-        pass
+        # Serialize and send the move to the server
+        self.socket.send(json.dumps(move).encode())
+
+    # def get_game_state(self):
+    #     """
+    #     Retrieves the current state of the game.
+
+    #     This method should be implemented to integrate with the Connect4 and
+    #     Board classes, returning the current state of the game.
+
+    #     Returns:
+    #         dict: The current state of the game.
+    #     """
+    #     # Assuming a `Game` class instance is managing the game state
+    #     game_state = Game.get_instance()
+    #     return game_state.get_state()  # Return the current game state
 
     def get_game_state(self):
         """
-        Retrieves the current state of the game.
+        Retrieves the current state of the game from the server.
 
-        This method should be implemented to integrate with the Connect4 and
-        Board classes, returning the current state of the game.
+        Returns:
+            dict: The current state of the game.
         """
-        pass
+        # Send a request to get the current game state
+        self.socket.send(json.dumps({"action": "get_state"}).encode())
+        # Receive and return the response
+        response = self.socket.recv(1024).decode()
+        return json.loads(response)

@@ -1,11 +1,10 @@
 """board.py
 
-Summary:
-    Class to represent a Connect 4 board.
+Class to represent a Connect 4 board.
 
-Extended Summary:
-    This class manages the state of the Connect 4 board, allows players to make moves,
-    checks if the board is full, determines the winner, and can reset itself to the initial state.
+This class manages the state of the Connect 4 board, allows players to make
+moves, checks if the board is full, determines the winner, and can reset itself
+to the initial state.
 
 Returns:
     bool: Whether the action (like making a move) was successful.
@@ -16,7 +15,9 @@ class Board:
     """
     Represents a Connect 4 board.
 
-    This class encapsulates the state and behavior of a Connect 4 board. It provides methods to initialize the board, make moves, check the game status (win, draw, or ongoing), and manage player turns.
+    This class encapsulates the state and behavior of a Connect 4 board. It
+    provides methods to initialize the board, make moves, check the game status
+    (win, draw, or ongoing), and manage player turns.
 
     Attributes:
         rows (int): Number of rows in the board. Default is 6.
@@ -55,45 +56,35 @@ class Board:
 
     def is_valid_move(self, column):
         """
-        is_valid_move _summary_
-
-        _extended_summary_
+        Checks if a move is valid in the given column.
 
         Args:
-            column (_type_): _description_
+            column (int): The column number to check.
 
         Returns:
-            _type_: _description_
+            bool: True if the move is valid, False otherwise.
         """
         return len(self.board[column]) < self.rows
 
     def available_moves(self):
         """
-        available_moves _summary_
-
-        _extended_summary_
+        Lists the columns available for making a move.
 
         Returns:
-            _type_: _description_
+            list: A list of column numbers where a move can be made.
         """
-        return [
-            col
-            for col, column_data in enumerate(self.board)
-            if len(column_data) < self.rows
-        ]
+        return [col for col, column_data in enumerate(self.board) if len(column_data) < self.rows]
 
     def make_move(self, player, column):
         """
-        make_move _summary_
-
-        _extended_summary_
+        Makes a move for the given player in the specified column.
 
         Args:
-            player (_type_): _description_
-            column (_type_): _description_
+            player (str): The player making the move ('X' or 'O').
+            column (int): The column number where the move is made.
 
         Returns:
-            _type_: _description_
+            bool: True if the move was successfully made, False otherwise.
         """
         for row in range(self.rows):
             if self.board[column][row] is None:
@@ -103,56 +94,46 @@ class Board:
 
     def is_full(self):
         """
-        is_full _summary_
-
-        _extended_summary_
+        Checks if the board is completely filled.
 
         Returns:
-            _type_: _description_
+            bool: True if the board is full, False otherwise.
         """
         return all(cell is not None for col in self.board for cell in col)
 
     def is_draw(self):
         """
-        is_draw _summary_
-
-        _extended_summary_
+        Checks if the game is a draw.
 
         Returns:
-            _type_: _description_
+            bool: True if the game is a draw, False otherwise.
         """
         return self.is_full() and not self.get_winner()
 
     def get_column_state(self, column):
         """
-        get_column_state _summary_
-
-        _extended_summary_
+        Retrieves the state of a specific column.
 
         Args:
-            column (_type_): _description_
+            column (int): The column number to retrieve the state of.
 
         Returns:
-            _type_: _description_
+            list: A list representing the state of the column.
         """
         return self.board[column]
 
     def switch_player(self):
         """
-        switch_player _summary_
-
-        _extended_summary_
+        Switches the current player.
         """
-        self.current_player = "O" if self.current_player == "X" else "X"
+        self.current_player = 'O' if self.current_player == 'X' else 'X'
 
     def get_winner(self):
         """
-        get_winner _summary_
-
-        _extended_summary_
+        Determines if there is a winner.
 
         Returns:
-            _type_: _description_
+            str: The winning player ('X' or 'O'), or None if there is no winner.
         """
         for col in range(self.columns):
             for row in range(self.rows):
@@ -187,12 +168,10 @@ class Board:
 
     def check_winner(self):
         """
-        check_winner _summary_
-
-        _extended_summary_
+        Checks for a winner on the board.
 
         Returns:
-            _type_: _description_
+            bool: True if there is a winner, False otherwise.
         """
         for row in range(6):
             for col in range(7):
@@ -240,9 +219,7 @@ class Board:
 
     def reset(self):
         """
-        reset _summary_
-
-        _extended_summary_
+        Resets the board to the initial state.
         """
         self.board = [[None for _ in range(self.rows)] for _ in range(self.columns)]
 
@@ -270,24 +247,23 @@ class Connect4:
 
     def draw_board(self):
         """
-        draw_board _summary_
+        Draws the current state of the board to the console.
 
-        _extended_summary_
+        This method is primarily for debugging and console-based testing.
         """
         print("\n".join([" ".join(row) for row in self.board[::-1]]))
         print(" ".join(map(str, range(1, 8))))
 
     def play_turn(self, col):
         """
-        play_turn _summary_
-
-        _extended_summary_
+        Handles a player's turn in the game.
 
         Args:
-            col (_type_): _description_
+            col (int): The column number where the player chooses to drop their
+            piece.
 
         Returns:
-            _type_: _description_
+            bool: True if the turn leads to a win or the game continues, False if the column is full.
         """
         if self.board.make_move(self.board.current_player, col):
             if self.board.get_winner():
