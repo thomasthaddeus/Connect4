@@ -1,6 +1,6 @@
 import socket
 import threading
-from app.game.network import Network  # replace 'your_module' with the name of the module containing the Network class
+from app.models.network import Network  # replace 'your_module' with the name of the module containing the Network class
 import pytest
 
 HOST, PORT = 'localhost', 12345

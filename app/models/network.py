@@ -33,12 +33,14 @@ class Network:
         Args:
             host (str, optional): The host address to bind the server. Defaults to 'localhost'.
             port (int, optional): The port number to bind the server. Defaults to 12345.
+            conn ()
         """
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.host = host
         self.port = port
         self.clients = []
+        self.conn = conn
 
     def start_server(self):
         """
@@ -55,8 +57,7 @@ class Network:
         """
         Establishes a connection to the server from a client.
 
-        This method is used by clients to connect to the server. It sets up the connection
-        and maintains it for sending and receiving data.
+        This method is used by clients to connect to the server. It sets up the connection and maintains it for sending and receiving data.
         """
         self.socket.connect((self.host, self.port))
         self.conn = self.socket
@@ -66,7 +67,8 @@ class Network:
         Sends data to the connected server or client.
 
         Args:
-            data (dict): The data to be sent, which is serialized into JSON format.
+            data (dict): The data to be sent, which is serialized into JSON
+            format.
         """
         message = json.dumps(data)
         self.conn.sendall(message.encode())
@@ -85,8 +87,8 @@ class Network:
         """
         Closes all client connections and the server socket.
 
-        This method is called to safely close all active connections and the server socket,
-        typically when shutting down the server.
+        This method is called to safely close all active connections and the
+        server socket, typically when shutting down the server.
         """
         for client in self.clients:
             client.close()
@@ -96,9 +98,9 @@ class Network:
         """
         Continuously accepts incoming client connections.
 
-        This method runs in a separate thread and is responsible for accepting new client
-        connections, adding them to the client list, and starting a new thread to handle
-        each client.
+        This method runs in a separate thread and is responsible for accepting
+        new client connections, adding them to the client list, and starting a
+        new thread to handle each client.
         """
         while True:
             conn, addr = self.server_socket.accept()
@@ -110,10 +112,12 @@ class Network:
         Handles the communication with a connected client.
 
         Args:
-            conn (socket.socket): The socket object representing the client connection.
+            conn (socket.socket): The socket object representing the client
+            connection.
 
-        This method is responsible for receiving data from a client, processing it (e.g., game logic),
-        and sending responses back. It runs in a separate thread for each client.
+        This method is responsible for receiving data from a client, processing
+        it (e.g., game logic), and sending responses back. It runs in a
+        separate thread for each client.
         """
         try:
             while True:

@@ -4,9 +4,9 @@ _summary_
 _extended_summary_
 """
 
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
 
-class GameStatisticsWindow(QWidget):
+class GameStatisticsWindow(QDialog):
     """
     GameStatisticsWindow _summary_
 
@@ -46,11 +46,7 @@ class GameStatisticsWindow(QWidget):
         main_menu_button.clicked.connect(self.main_menu)
         layout.addWidget(main_menu_button)
 
-    def main_menu(self):
-        """
-        main_menu _summary_
 
-        _extended_summary_
-        """
-        # Logic to return to the main menu or close this window
-        pass
+    def main_menu(self):
+        # Logic for returning to the main menu
+        self.reject()  # Closes the dialog and returns QDialog.Rejected

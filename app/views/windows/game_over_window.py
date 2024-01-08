@@ -10,9 +10,10 @@ the game, providing closure to each game session and guiding the player to
 their next action.
 """
 
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
+from PyQt6.QtCore import pyqtSignal
 
-class GameOverWindow(QWidget):
+class GameOverWindow(QDialog):
     """
     A window that displays the result of a Connect 4 game and offers post-game
     options.
@@ -26,6 +27,8 @@ class GameOverWindow(QWidget):
         QWidget (QWidget): Inherits from QWidget, a base class for all UI
         objects in PyQt.
     """
+    play_again_signal = pyqtSignal()
+
     def __init__(self, winner, parent=None):
         """
         Initializes the GameOverWindow with the game's result.
@@ -37,6 +40,7 @@ class GameOverWindow(QWidget):
         """
         super().__init__(parent)
         self.setWindowTitle("Game Over")
+        self.setModal(True)  # Set the window as modal
 
         layout = QVBoxLayout(self)
 
@@ -57,18 +61,10 @@ class GameOverWindow(QWidget):
     def play_again(self):
         """
         Triggers the action to start a new game.
-
-        This method should be connected to the game logic or signal the main
-        window to reset the game state and start a new game.
         """
-        # TODO: Implement logic for replaying the game
-        pass
+        # Logic for playing again
+        self.accept()  # Closes the dialog and returns QDialog.Accepted
 
     def main_menu(self):
-        """
-        Navigates the player back to the main menu.
-
-        This method should be connected to the main window or game logic to close the current game view and return to the main menu.
-        """
-        # TODO: Implement logic for returning to the main menu
-        pass
+        # Logic for returning to the main menu
+        self.reject()  # Closes the dialog and returns QDialog.Rejected

@@ -9,7 +9,7 @@ be used at the end of a game to offer these post-game choices to the user.
 """
 
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
-from widgets.return_to_main_menu_widget import ReturnToMainMenuWidget
+from widgets import ReturnToMainMenuWidget
 
 
 class GameOverWidget(QWidget):

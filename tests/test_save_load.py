@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import Any
 import pytest
-from ..app.data.save_load import SaveLoad
+from ..app.controllers.save_load import SaveLoad
 
 # Setup for the tests
 @pytest.fixture

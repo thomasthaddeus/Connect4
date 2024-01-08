@@ -18,6 +18,7 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QComboBox,
 )
+from widgets import return_to_main_menu_widget
 
 
 class PlayerSetupWindow(QWidget):
@@ -95,3 +96,11 @@ class PlayerSetupWindow(QWidget):
         """
         # Logic to start the game
         pass
+
+
+if __name__ == '__main__':
+    from PyQt6.QtWidgets import QApplication
+    app = QApplication([])
+    window = PlayerSetupWindow()
+    window.show()
+    app.exec()

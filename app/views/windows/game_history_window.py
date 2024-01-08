@@ -11,7 +11,9 @@ data structure, assuming each game has identifiable attributes like 'id' and
 """
 
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QListWidget, QListWidgetItem, QApplication
-from return_to_main_menu_widget import ReturnToMainMenuWidget
+from widgets import ReturnToMainMenuWidget
+from game_statistics_window import GameStatisticsWindow
+
 
 class GameHistoryWindow(QWidget):
     """
@@ -34,12 +36,14 @@ class GameHistoryWindow(QWidget):
         """
         super().__init__()
         self.setWindowTitle("Game History")
+        self.return_widget = ReturnToMainMenuWidget(self)
+        self.games_list = QListWidget(self)
         self.games = games
+        self.game_statistics = GameStatisticsWindow(self)
 
         layout = QVBoxLayout(self)
 
         # List of Past Games
-        self.games_list = QListWidget(self)
         for game in games:
             item = QListWidgetItem(game['name'])
             item.setData(256, game['id'])
@@ -57,7 +61,6 @@ class GameHistoryWindow(QWidget):
         layout.addWidget(main_menu_btn)
 
         # Return to Main Menu Widget
-        self.return_widget = ReturnToMainMenuWidget(self)
         layout.addWidget(self.return_widget)
 
 
@@ -74,7 +77,7 @@ class GameHistoryWindow(QWidget):
             selected_game_id = selected_items[0].data(256)
             # Find the selected game from self.games and show its details
             # For instance, you might show a new window or a dialog here
-            pass
+            self.game_statistics
 
     def return_to_main(self):
         """
@@ -83,7 +86,7 @@ class GameHistoryWindow(QWidget):
         This method is triggered when the 'Return to Main Menu' button is clicked.
         It should close the current window and return to the main menu.
         """
-        # Logic to return to the main menu
+        self.return_widget
         self.close()
 
 if __name__ == '__main__':

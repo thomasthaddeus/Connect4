@@ -11,10 +11,10 @@ clicked, opens the corresponding window or performs the associated action.
 
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel
-from windows.game_history_window import GameHistoryWindow
-from windows.game_statistics_window import GameStatisticsWindow
-from windows.network_setup_window import NetworkSetupWindow
-from windows.player_setup_window import PlayerSetupWindow
+from windows import GameHistoryWindow
+from windows import GameStatisticsWindow
+from windows import NetworkSetupWindow
+from windows import PlayerSetupWindow
 
 class MainMenuWindow(QWidget):
     """
@@ -35,6 +35,10 @@ class MainMenuWindow(QWidget):
         """
         super().__init__()
         self.setWindowTitle("Connect 4")
+        self.player_setup_window = PlayerSetupWindow()
+        self.network_setup_window = NetworkSetupWindow()
+        self.game_statistics_window = GameStatisticsWindow([])
+        self.game_history_window = GameHistoryWindow([])
 
         layout = QVBoxLayout(self)
 
@@ -80,7 +84,6 @@ class MainMenuWindow(QWidget):
         It initializes and shows the PlayerSetupWindow for setting up a game
         against an AI opponent.
         """
-        self.player_setup_window = PlayerSetupWindow()
         self.player_setup_window.show()
 
     def multiplayer(self):
@@ -91,7 +94,6 @@ class MainMenuWindow(QWidget):
         button is clicked. It initializes and shows the NetworkSetupWindow for
         setting up a local or network multiplayer game.
         """
-        self.network_setup_window = NetworkSetupWindow()
         self.network_setup_window.show()
 
     def view_game_stats(self):
@@ -104,7 +106,6 @@ class MainMenuWindow(QWidget):
         """
         # For simplicity, I'm assuming empty data.
         # Replace with your actual data.
-        self.game_statistics_window = GameStatisticsWindow([])
         self.game_statistics_window.show()
 
     def view_game_history(self):
@@ -117,7 +118,6 @@ class MainMenuWindow(QWidget):
         """
         # For simplicity, I'm assuming empty data.
         # Replace with your actual data.
-        self.game_history_window = GameHistoryWindow([])
         self.game_history_window.show()
 
 if __name__ == '__main__':

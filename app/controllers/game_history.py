@@ -32,6 +32,24 @@ class GameHistory:
         """
         self.games = []
 
+    def __str__(self):
+        """
+        Returns a string representation of the GameHistory instance.
+
+        Returns:
+            str: A summary string indicating the total number of games recorded.
+        """
+        return f"Total games recorded: {self.get_game_count()}"
+
+    def __repr__(self):
+        """
+        Returns a formal string representation of the GameHistory object.
+
+        Returns:
+            str: A formal representation of the GameHistory object.
+        """
+        return f"GameHistory(games={self.games})"
+
     def add_game(self, start_time, end_time, winner, moves):
         """
         Adds a record of a game to the game history.
@@ -121,21 +139,3 @@ class GameHistory:
         Clears all stored game history, resetting the history to an empty state.
         """
         self.games = []
-
-    def __str__(self):
-        """
-        Returns a string representation of the GameHistory instance.
-
-        Returns:
-            str: A summary string indicating the total number of games recorded.
-        """
-        return f"Total games recorded: {self.get_game_count()}"
-
-    def __repr__(self):
-        """
-        Returns a formal string representation of the GameHistory object.
-
-        Returns:
-            str: A formal representation of the GameHistory object.
-        """
-        return f"GameHistory(games={self.games})"

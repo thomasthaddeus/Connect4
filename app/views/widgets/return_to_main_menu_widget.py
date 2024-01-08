@@ -12,7 +12,7 @@ TODO: Add additional methods or logic as needed for the ReturnToMainMenuWidget.
 """
 
 from PyQt6.QtWidgets import QWidget, QPushButton, QVBoxLayout, QApplication
-from windows.main_menu_window import MainMenuWindow
+from windows import MainMenuWindow
 
 class ReturnToMainMenuWidget(QWidget):
     """
@@ -36,6 +36,7 @@ class ReturnToMainMenuWidget(QWidget):
         super().__init__(parent)
 
         self.layout = QVBoxLayout(self)
+        self.main_menu = MainMenuWindow()
 
         # Button to return to the main menu
         self.main_menu_button = QPushButton("Return to Main Menu")
@@ -50,7 +51,6 @@ class ReturnToMainMenuWidget(QWidget):
         closes the current window (which is typically a game over or game
         window).
         """
-        self.main_menu = MainMenuWindow()
         self.main_menu.show()
         self.close()
 

@@ -10,7 +10,7 @@ as dropping pieces onto the board and ending the game.
 """
 
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QGridLayout, QApplication
-from widgets.game_over_widget import GameOverWidget
+from widgets import GameOverWidget
 
 
 class GameWindow(QWidget):

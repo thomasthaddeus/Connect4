@@ -5,9 +5,7 @@ _summary_
 _extended_summary_
 """
 
-from AI import AI
-from board import Board, Connect4
-from player import Player
+from models import AI, Board, Connect4, Player
 
 class GameBackend:
     """

@@ -6,20 +6,10 @@ _extended_summary_
 """
 
 from PyQt6.QtWidgets import QApplication
-from gui.windows.main_menu_window import MainMenuWindow
-from gui.windows.game_window import GameWindow
-from gui.windows.game_over_window import GameOverWindow
-from gui.windows.game_statistics_window import GameStatisticsWindow
-from gui.windows.game_history_window import GameHistoryWindow
-from gui.windows.network_setup_window import NetworkSetupWindow
-from gui.windows.player_setup_window import PlayerSetupWindow
-from main.game_backend import GameBackend
-from data.game_statistics import GameStatistics
-from data.save_load import SaveLoad
-from data.game_history import GameHistory
-from game.AI import AI
-from game.board import Board, Connect4
-from game.player import Player
+from gui.windows import MainMenuWindow, GameWindow, GameOverWindow, GameStatisticsWindow, GameHistoryWindow, NetworkSetupWindow, PlayerSetupWindow
+from data import GameStatistics, SaveLoad, GameHistory
+from models import AI, Board, Connect4, Player, GameBackend
+
 
 class App:
     """
@@ -109,6 +99,15 @@ class App:
         # For example, in PyQt:
         # app = QApplication(sys.argv)
         # sys.exit(app.exec_())
+
+
+def start_new_game(self):
+    """
+    Closes the GameOverWindow and opens a new GameWindow.
+    """
+    game_over_window.close()
+    new_game_window = GameWindow()
+    new_game_window.show()
 
 class Database:
     """
