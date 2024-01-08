@@ -100,11 +100,11 @@ QCheckBox::indicator {
 }
 
 QCheckBox::indicator:unchecked {
-    image: url(:/path/to/unchecked_image.png);
+    image: url(./icons/check_box_outline_blank_24px.svg);
 }
 
 QCheckBox::indicator:checked {
-    image: url(:/path/to/checked_image.png);
+    image: url(./icons/check_box_24px.svg);
 }
 
 /* QRadioButton styling */
@@ -114,11 +114,11 @@ QRadioButton::indicator {
 }
 
 QRadioButton::indicator:unchecked {
-    image: url(:/path/to/radio_unchecked.png);
+    image: url(./icons/radio_unchecked.svg);
 }
 
 QRadioButton::indicator:checked {
-    image: url(:/path/to/radio_checked.png);
+    image: url(./icons/radio_checked.svg);
 }
 
 /* QMenuBar and QMenu styling */
@@ -161,18 +161,21 @@ QTabBar::tab {
 }
 
 QTabBar::tab:selected {
-    background-color: #e5e5e5;
+    background-color: #4CAF50;
+    color: white;
 }
 
 /* QGroupBox styling */
 QGroupBox {
-    border: 1px solid #dcdcdc;
+    border: 2px solid #dcdcdc;
     border-radius: 5px;
     margin-top: 10px;
 }
 
 QGroupBox::title {
     subcontrol-origin: margin;
+    subcontrol-position: top center;
+    font-weight: bold;
     padding: 5px 10px;
     color: #333;
 }
@@ -289,7 +292,7 @@ QToolBar {
 }
 
 QToolBar::handle {
-    image: url(:/path/to/your/handle/image.png);
+    image: url(:/icons/toolbar.svg);
 }
 
 /* QRadioButton and QCheckBox (refined with hover effect) */
@@ -306,11 +309,11 @@ QDateEdit, QTimeEdit, QDateTimeEdit {
 }
 
 QDateEdit::down-arrow, QTimeEdit::down-arrow, QDateTimeEdit::down-arrow {
-    image: url(:/path/to/your/arrow/down/image.png);
+    image: url(:/icons/arrow-down.svg);
 }
 
 QDateEdit::up-arrow, QTimeEdit::up-arrow, QDateTimeEdit::up-arrow {
-    image: url(:/path/to/your/arrow/up/image.png);
+    image: url(:/icons/arrow-down.svg);
 }
 
 /* QDial styling */
@@ -344,6 +347,7 @@ QSpinBox::up-button, QDoubleSpinBox::up-button {
     border-left-style: solid;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+    image: url(./icons/arrow-up.svg);
 }
 
 QSpinBox::down-button, QDoubleSpinBox::down-button {
@@ -355,6 +359,7 @@ QSpinBox::down-button, QDoubleSpinBox::down-button {
     border-left-style: solid;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+    image: url(./icons/arrow-down.svg);
 }
 
 /* Additional elements and refinements can be added as needed */
